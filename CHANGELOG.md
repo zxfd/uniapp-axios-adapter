@@ -1,5 +1,7 @@
 
 
+## [0.1.1](https://github.com/zxfd/uniapp-axios-adapter/compare/0.1.0...0.1.1) (2022-10-21)
+
 # 0.1.0 (2022-10-21)
 
 
