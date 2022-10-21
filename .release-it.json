@@ -1,6 +1,6 @@
 {
   "github": {
-    "release": true
+    "release": false
   },
   "git": {
     "commitMessage": "release: 更新到v${version}"
