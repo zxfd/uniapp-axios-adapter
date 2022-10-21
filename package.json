@@ -1,0 +1,15 @@
+{
+  "name": "uniapp-axios-adapter",
+  "version": "0.0.0",
+  "description": "axios adapter for uni.request",
+  "main": "index.js",
+  "keywords": [
+    "axios",
+    "uni-app",
+    "adapter",
+    "小程序",
+    "微信小程序"
+  ],
+  "author": "zxiaofoo@qq.com",
+  "license": "MIT"
+}
