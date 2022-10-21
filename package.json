@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "axios adapter for uni.request",
   "main": "index.js",
+  "scripts": {
+    "release": "release-it"
+  },
   "keywords": [
     "axios",
     "uni-app",
@@ -11,5 +14,9 @@
     "微信小程序"
   ],
   "author": "zxiaofoo@qq.com",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@release-it/conventional-changelog": "^5.1.1",
+    "release-it": "^15.5.0"
+  }
 }
