@@ -19,7 +19,7 @@
 
 ### 安装 axios
 
-由于本插件只是`axios`的一个适配器,所以我们还需要
+由于本插件只是`axios`的一个适配器,所以我们还需要安装 `axios`
 
 `axios v1.0+`尚不稳定,推荐安装`0.27.2`版本
 
@@ -38,7 +38,7 @@ import { UniAdapter } from "uniapp-axios-adapter";
 
 // 每次请求都创建一个新的实例
 const request = axios.create({
-  baseURL: "https://ioffice.tslsmart.com",
+  baseURL: "https://example.com",
   timeout: 10000,
   adapter: UniAdapter, // 指定适配器
 });
@@ -52,7 +52,7 @@ import axios from "axios";
 import { UniAdapter } from "uniapp-axios-adapter";
 
 const request = axios.create({
-  baseURL: "https://ioffice.tslsmart.com",
+  baseURL: "https://example.com",
   timeout: 10000,
   adapter: UniAdapter,
 });
@@ -104,4 +104,4 @@ http({
 
 ## 更新日志
 
-[点击查看]('./CHANGELOG.md')
+[点击查看]('https://gitee.com/black-key/uniapp-axios-adapter/blob/main/CHANGELOG.md')
