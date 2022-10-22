@@ -13,6 +13,10 @@
     "小程序",
     "微信小程序"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zxfd/uniapp-axios-adapter"
+  },
   "author": "zxiaofoo@qq.com",
   "license": "MIT",
   "devDependencies": {
