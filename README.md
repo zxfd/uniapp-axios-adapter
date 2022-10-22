@@ -1,10 +1,10 @@
 ## uniapp-axios-adapter
 
-用于`uni-app`的`axios`库的`adapter`适配器
+用于`uni-app`的`axios`库以及使用到的`UniAdapter`适配器
 
-利用`axios`的`adapter`适配器来兼容了小程序的请求 api。添加本适配器后,`axios`底层将使用`uni.request`发起请求
+利用`axios`的`adapter`适配器来兼容了小程序的请求 api。添加本适配器或者使用本包导出的适配器后,`axios`底层将使用`uni.request`发起请求
 
-项目源码很简单,感兴趣的可以自行查看
+项目源码很简单,感兴趣的可以前往`github`或者`gitee`查看
 
 ## 安装
 
@@ -19,7 +19,7 @@
 
 ### 安装 axios
 
-由于本插件只是`axios`的一个适配器,所以我们还需要安装 `axios`
+我们在包里添加了任何版本的`axios`作为依赖,如果你不想使用最新版本的`axios`,可以自行安装指定版本的`axios`配合我们的`UniAdapter`来使用,`tree-shaking`不会将本包依赖的`axios`打包进生产环境中
 
 `axios v1.0+`尚不稳定,推荐安装`0.27.2`版本
 
@@ -29,6 +29,10 @@
 ```
 
 ### 使用
+
+我们按需导出了`UniAdapter`适配器,并且默认导出了使用了该适配器的`axios`,你可以自行使用适配器,也可以直接使用我们导出的 axios
+
+### 自行使用适配器
 
 指定`axios`的适配器`adapter`为本适配器即可,其余用法与`axios`保持一致
 
@@ -64,7 +68,7 @@ request.interceptors.request.use((config) => {
 });
 
 request.interceptors.response.use((response) => {
-  // 统一处理响应
+  // 统一处理响应,返回Promise以便链式调用
   if (response.status === 200) {
     const { data } = response;
     if (data && data.code === 200) {
@@ -100,6 +104,54 @@ http({
   }
 })
 
+```
+
+### 使用开箱即用的 axios
+
+#### 添加拦截器的方式
+
+```js
+// http.js中
+import axios from "uniapp-axios-adapter";
+const request = axios.create({
+  baseURL: "https://example.com",
+  timeout: 10000,
+});
+
+request.interceptors.request.use((config) => {
+  //带上token
+  config.headers["Authorization"] = "token";
+  return config;
+});
+
+request.interceptors.response.use((response) => {
+  // 统一处理响应,返回Promise以便链式调用
+  if (response.status === 200) {
+    const { data } = response;
+    if (data && data.code === 200) {
+      return Promise.resolve(data);
+    } else {
+      return Promise.reject(data);
+    }
+  } else {
+    return Promise.reject(response);
+  }
+});
+
+export default request;
+```
+
+#### 直接使用
+
+```js
+// 业务代码中
+import axios from "uniapp-axios-adapter";
+axios.get({
+  url: "https://example.com/api/getUserById",
+  params: {
+    id: 1,
+  },
+});
 ```
 
 ## 更新日志
