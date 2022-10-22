@@ -1,5 +1,12 @@
 
 
+# [0.2.0](https://github.com/zxfd/uniapp-axios-adapter/compare/0.1.0...0.2.0) (2022-10-22)
+
+
+### Features
+
+* **index入口文件:** ✨ 默认导出设置了适配器的axios ([1b37542](https://github.com/zxfd/uniapp-axios-adapter/commit/1b3754231892a8793ff11f6fc636c098c87b277a))
+
 ## [0.1.1](https://github.com/zxfd/uniapp-axios-adapter/compare/0.1.0...0.1.1) (2022-10-21)
 
 # 0.1.0 (2022-10-21)
