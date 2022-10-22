@@ -1,5 +1,12 @@
 
 
+## [0.2.1](https://github.com/zxfd/uniapp-axios-adapter/compare/0.2.0...0.2.1) (2022-10-22)
+
+
+### Bug Fixes
+
+* **adapters:** 🐞 在非uni-app环境下报错 ([783198f](https://github.com/zxfd/uniapp-axios-adapter/commit/783198f86db6d48f2d528fd50b59ab0d3cb16062))
+
 # [0.2.0](https://github.com/zxfd/uniapp-axios-adapter/compare/0.1.0...0.2.0) (2022-10-22)
 
 
