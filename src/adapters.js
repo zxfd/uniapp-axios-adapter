@@ -12,6 +12,9 @@ const getResponse = (res, config) => {
 };
 
 const uniAdapter = (config) => {
+  if (!uni) {
+    throw new Error("please use this in uni-app project!");
+  }
   return new Promise((resolve, reject) => {
     const { baseURL, url, headers } = config;
     uni.request({
