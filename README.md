@@ -157,3 +157,8 @@ axios.get({
 ## 更新日志
 
 [点击查看]('https://gitee.com/black-key/uniapp-axios-adapter/blob/main/CHANGELOG.md')
+
+## TODO
+
+- 压缩打包,减小体积
+- 适配`uni.downloadFile`和`uni.uploadFile`
