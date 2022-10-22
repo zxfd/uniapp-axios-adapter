@@ -18,5 +18,8 @@
   "devDependencies": {
     "@release-it/conventional-changelog": "^5.1.1",
     "release-it": "^15.5.0"
+  },
+  "dependencies": {
+    "axios": "*"
   }
 }
