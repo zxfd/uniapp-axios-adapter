@@ -2,7 +2,7 @@
 
 用于`uni-app`的`axios`库以及使用到的`UniAdapter`适配器
 
-利用`axios`的`adapter`适配器来兼容了小程序的请求 api。添加本适配器或者使用本包导出的适配器后,`axios`底层将使用`uni.request`发起请求
+利用`axios`的`adapter`适配器来兼容了小程序的请求 api。添加本适配器或者使用本包导出的`axios`后,`axios`底层将使用`uni.request`发起请求
 
 项目源码很简单,感兴趣的可以前往`github`或者`gitee`查看
 
@@ -19,7 +19,7 @@
 
 ### 安装 axios
 
-我们在包里添加了任何版本的`axios`作为依赖,如果你不想使用最新版本的`axios`,可以自行安装指定版本的`axios`配合我们的`UniAdapter`来使用,`tree-shaking`不会将本包依赖的`axios`打包进生产环境中
+我们在包里添加了最新版本的`axios`作为依赖,如果你不想使用最新版本的`axios`,可以自行安装指定版本的`axios`配合我们的`UniAdapter`来使用,`tree-shaking`不会将本包依赖的`axios`打包进生产环境中
 
 `axios v1.0+`尚不稳定,推荐安装`0.27.2`版本
 
