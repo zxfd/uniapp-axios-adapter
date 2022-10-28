@@ -16,11 +16,18 @@ const uniAdapter = (config) => {
     throw new Error("please use this in uni-app project!");
   }
   return new Promise((resolve, reject) => {
-    const { baseURL, url, headers } = config;
-    uni.request({
+    const { baseURL, url, headers, data, params } = config;
+    const uniConfig = {
       ...config,
       url: baseURL + url,
       header: headers,
+    };
+
+    if (data || params) {
+      uniConfig.data = JSON.parse(data || params);
+    }
+    uni.request({
+      ...uniConfig,
       success(res) {
         const response = getResponse(res);
         resolve(response, config);
