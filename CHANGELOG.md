@@ -1,5 +1,12 @@
 
 
+## [0.2.2](https://github.com/zxfd/uniapp-axios-adapter/compare/0.2.1...0.2.2) (2022-10-28)
+
+
+### Bug Fixes
+
+* **adapters适配器:** 🐞 修复参数未正确携带的问题 ([cc45064](https://github.com/zxfd/uniapp-axios-adapter/commit/cc45064ff4c21172694bb679cd0afe7adcbcb335))
+
 ## [0.2.1](https://github.com/zxfd/uniapp-axios-adapter/compare/0.2.0...0.2.1) (2022-10-22)
 
 
