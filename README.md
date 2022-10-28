@@ -156,7 +156,7 @@ axios.get({
 
 ## 更新日志
 
-[点击查看]('https://gitee.com/black-key/uniapp-axios-adapter/blob/main/CHANGELOG.md')
+[点击查看](https://gitee.com/black-key/uniapp-axios-adapter/blob/main/CHANGELOG.md)
 
 ## TODO
 
