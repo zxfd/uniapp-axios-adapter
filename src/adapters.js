@@ -24,7 +24,11 @@ const uniAdapter = (config) => {
     };
 
     if (data || params) {
-      uniConfig.data = JSON.parse(data || params);
+      try {
+        uniConfig.data = JSON.parse(data || params);
+      } catch (error) {
+        uniConfig.data = data || params;
+      }
     }
     uni.request({
       ...uniConfig,
