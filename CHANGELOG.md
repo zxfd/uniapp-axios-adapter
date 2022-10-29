@@ -1,5 +1,12 @@
 
 
+## [0.2.3](https://github.com/zxfd/uniapp-axios-adapter/compare/0.2.2...0.2.3) (2022-10-29)
+
+
+### Bug Fixes
+
+* **adapters:** 🐞 修复参数为对象时无法发起请求的问题 ([0c29b2e](https://github.com/zxfd/uniapp-axios-adapter/commit/0c29b2ee0ae3bb69de420e6ae50d4002e6c25881))
+
 ## [0.2.2](https://github.com/zxfd/uniapp-axios-adapter/compare/0.2.1...0.2.2) (2022-10-28)
 
 
