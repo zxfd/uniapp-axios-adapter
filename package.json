@@ -6,6 +6,14 @@
   "scripts": {
     "release": "release-it"
   },
+  "typings": "types/index.d.ts",
+  "files": [
+    "src",
+    "types",
+    "index.js",
+    "README.md",
+    "CHANGELOG.md"
+  ],
   "keywords": [
     "axios",
     "uni-app",
