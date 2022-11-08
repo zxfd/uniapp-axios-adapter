@@ -5,7 +5,9 @@
   "main": "lib/index.esm.js",
   "scripts": {
     "release": "release-it",
-    "build": "rollup -c"
+    "prebuild": "yarn release",
+    "build": "rollup -c && yarn zip",
+    "zip": "zip -r uniapp-axios-adapter.zip lib index.d.ts README.md CHANGELOG.md package.json"
   },
   "exports": {
     ".": {
