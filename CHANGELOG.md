@@ -1,5 +1,13 @@
 
 
+# [0.3.0](https://github.com/zxfd/uniapp-axios-adapter/compare/0.2.2...0.3.0) (2022-11-08)
+
+
+### Features
+
+* **index.d.ts:** ✨ 新增类型声明文件,支持ts ([7f7076b](https://github.com/zxfd/uniapp-axios-adapter/commit/7f7076b8c5ade0227e8f568cc62b3ab5f9e70f63))
+* **package.json:** ✨ 同时支持commonJS esm和ts ([2cde861](https://github.com/zxfd/uniapp-axios-adapter/commit/2cde8611b4fcd6efe5b31d4cb100ccf91c5bde01))
+
 ## [0.2.2](https://github.com/zxfd/uniapp-axios-adapter/compare/0.2.1...0.2.2) (2022-10-28)
 
 
