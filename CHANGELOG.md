@@ -1,5 +1,12 @@
 
 
+## [0.3.2](https://github.com/zxfd/uniapp-axios-adapter/compare/0.3.1...0.3.2) (2022-11-24)
+
+
+### Bug Fixes
+
+* **adapters:** 🐞 移除不需要的Promise处理 ([2a637aa](https://github.com/zxfd/uniapp-axios-adapter/commit/2a637aa86d4cdce8704227a70d4830e00c1ea631))
+
 ## [0.3.1](https://github.com/zxfd/uniapp-axios-adapter/compare/0.3.0...0.3.1) (2022-11-24)
 
 
