@@ -29,11 +29,11 @@ const uniAdapter = (config) => {
     uni.request({
       ...uniConfig,
       success(res) {
-        const response = getResponse(res);
+        const response = getResponse(res, config);
         resolve(response, config);
       },
       fail(res) {
-        const response = getResponse(res);
+        const response = getResponse(res, config);
         reject(response, config);
       },
     });
