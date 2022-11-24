@@ -34,11 +34,11 @@ const uniAdapter = (config) => {
       ...uniConfig,
       success(res) {
         const response = getResponse(res, config);
-        resolve(response, config);
+        resolve(response);
       },
       fail(res) {
         const response = getResponse(res, config);
-        reject(response, config);
+        reject(response);
       },
     });
   });
