@@ -19,7 +19,7 @@ const uniAdapter = (config) => {
     const { baseURL, url, headers, data, params } = config;
     const uniConfig = {
       ...config,
-      url: baseURL + url,
+      url: (baseURL || '') + url,
       header: headers,
     };
 
