@@ -9,7 +9,7 @@ afterEach(() => {
   globalThis.uni = originalUni;
 });
 
-const requestWithHeaders = async (headers) => {
+const requestWithConfig = async (requestConfig) => {
   let receivedConfig;
 
   globalThis.uni = {
@@ -19,10 +19,13 @@ const requestWithHeaders = async (headers) => {
     },
   };
 
-  await uniAdapter({ url: "/users", headers });
+  await uniAdapter(requestConfig);
 
   return receivedConfig;
 };
+
+const requestWithHeaders = (headers) =>
+  requestWithConfig({ url: "/users", headers });
 
 test("converts AxiosHeaders-compatible headers to a plain object", async () => {
   const plainHeaders = { Authorization: "Bearer token" };
@@ -82,4 +85,71 @@ test("preserves request and response fields without object spread", async () => 
   assert.equal(response.status, 201);
   assert.equal(response.statusText, "request:ok");
   assert.equal(response.config, requestConfig);
+});
+
+test("builds request URLs with Axios-compatible baseURL semantics", async (t) => {
+  const cases = [
+    {
+      name: "keeps an HTTP absolute URL",
+      config: {
+        baseURL: "https://configured.test/api",
+        url: "http://api.test.com/wx/login",
+      },
+      expected: "http://api.test.com/wx/login",
+    },
+    {
+      name: "keeps an HTTPS absolute URL",
+      config: {
+        baseURL: "https://configured.test/api",
+        url: "https://api.test.com/wx/login",
+      },
+      expected: "https://api.test.com/wx/login",
+    },
+    {
+      name: "keeps a protocol-relative URL",
+      config: {
+        baseURL: "https://configured.test/api",
+        url: "//api.test.com/wx/login",
+      },
+      expected: "//api.test.com/wx/login",
+    },
+    {
+      name: "combines a relative URL with one slash",
+      config: {
+        baseURL: "https://configured.test/api/",
+        url: "/wx/login",
+      },
+      expected: "https://configured.test/api/wx/login",
+    },
+    {
+      name: "combines a relative URL without surrounding slashes",
+      config: {
+        baseURL: "https://configured.test/api",
+        url: "wx/login",
+      },
+      expected: "https://configured.test/api/wx/login",
+    },
+    {
+      name: "keeps a relative URL when baseURL is absent",
+      config: { url: "/wx/login" },
+      expected: "/wx/login",
+    },
+    {
+      name: "combines an absolute URL when allowAbsoluteUrls is false",
+      config: {
+        baseURL: "https://configured.test/api",
+        url: "https://api.test.com/wx/login",
+        allowAbsoluteUrls: false,
+      },
+      expected: "https://configured.test/api/https://api.test.com/wx/login",
+    },
+  ];
+
+  for (const { name, config, expected } of cases) {
+    await t.test(name, async () => {
+      const receivedConfig = await requestWithConfig(config);
+
+      assert.equal(receivedConfig.url, expected);
+    });
+  }
 });

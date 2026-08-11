@@ -10,14 +10,30 @@ const getResponse = (res, config) => {
   return response;
 };
 
+const isAbsoluteURL = (url) =>
+  /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url);
+
+const combineURLs = (baseURL, relativeURL) =>
+  relativeURL
+    ? baseURL.replace(/\/+$/, "") + "/" + relativeURL.replace(/^\/+/, "")
+    : baseURL;
+
+const buildFullPath = (baseURL, url, allowAbsoluteUrls) => {
+  if (baseURL && (!isAbsoluteURL(url) || allowAbsoluteUrls === false)) {
+    return combineURLs(baseURL, url);
+  }
+
+  return url;
+};
+
 const uniAdapter = (config) => {
   if (!uni) {
     throw new Error("please use this in uni-app project!");
   }
   return new Promise((resolve, reject) => {
-    const { baseURL, url, headers, data, params } = config;
+    const { baseURL, url, headers, data, params, allowAbsoluteUrls } = config;
     const uniConfig = Object.assign({}, config, {
-      url: (baseURL || '') + url,
+      url: buildFullPath(baseURL, url, allowAbsoluteUrls),
       header:
         headers && typeof headers.toJSON === "function"
           ? headers.toJSON()
