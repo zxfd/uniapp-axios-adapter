@@ -4,6 +4,7 @@
   "description": "axios adapter for uni.request",
   "main": "lib/index.esm.js",
   "scripts": {
+    "test": "node --experimental-default-type=module --test",
     "release": "release-it",
     "prebuild": "yarn release",
     "build": "rollup -c && yarn zip",

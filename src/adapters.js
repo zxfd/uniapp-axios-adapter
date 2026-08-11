@@ -20,7 +20,10 @@ const uniAdapter = (config) => {
     const uniConfig = {
       ...config,
       url: (baseURL || '') + url,
-      header: headers,
+      header:
+        headers && typeof headers.toJSON === "function"
+          ? headers.toJSON()
+          : headers,
     };
 
     if (data || params) {
