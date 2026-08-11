@@ -6,6 +6,8 @@
 
 项目源码很简单,感兴趣的可以前往`github`或者`gitee`查看
 
+> 支持范围：当前`UniAdapter`仅适配普通的`uni.request`请求。`uni.uploadFile`和`uni.downloadFile`需要额外的文件参数、返回值及任务生命周期约定，目前尚未支持。
+
 ## 安装
 
 ### 安装 uniapp-axios-adapter
@@ -19,13 +21,13 @@
 
 ### 安装 axios
 
-我们在包里添加了最新版本的`axios`作为依赖,如果你不想使用最新版本的`axios`,可以自行安装指定版本的`axios`配合我们的`UniAdapter`来使用,`tree-shaking`不会将本包依赖的`axios`打包进生产环境中
+本包将`axios`声明为 peer dependency，需要在业务项目中自行安装。你可以安装符合项目要求的版本，构建产物不会重复打包`axios`。
 
-`axios v1.0+`尚不稳定,推荐安装`0.27.2`版本
+适配器同时支持普通请求头对象，以及 Axios 1.x 使用的`AxiosHeaders`请求头。
 
 ```shell
-  pnpm/npm i axios@0.27.2
-  # 或者 yarn add axios@0.27.2
+  pnpm/npm i axios
+  # 或者 yarn add axios
 ```
 
 ### 使用
