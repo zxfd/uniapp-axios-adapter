@@ -59,3 +59,27 @@ test("supports requests without headers", async () => {
 
   assert.equal(config.header, undefined);
 });
+
+test("preserves request and response fields without object spread", async () => {
+  let receivedConfig;
+  const requestConfig = { url: "/users", timeout: 1_000 };
+
+  globalThis.uni = {
+    request(config) {
+      receivedConfig = config;
+      config.success({
+        data: { id: 1 },
+        statusCode: 201,
+        errMsg: "request:ok",
+      });
+    },
+  };
+
+  const response = await uniAdapter(requestConfig);
+
+  assert.equal(receivedConfig.timeout, 1_000);
+  assert.deepEqual(response.data, { id: 1 });
+  assert.equal(response.status, 201);
+  assert.equal(response.statusText, "request:ok");
+  assert.equal(response.config, requestConfig);
+});
