@@ -1,5 +1,15 @@
 
 
+## [0.3.3](https://github.com/zxfd/uniapp-axios-adapter/compare/0.3.2...0.3.3) (2026-08-12)
+
+
+### Bug Fixes
+
+* **adapter:** 兼容 AxiosHeaders 请求头 ([fbdb46a](https://github.com/zxfd/uniapp-axios-adapter/commit/fbdb46a1eb1317676efc3b447cf60662c29612af)), closes [#9](https://github.com/zxfd/uniapp-axios-adapter/issues/9)
+* **adapter:** 兼容低版本浏览器语法 ([f50bdf0](https://github.com/zxfd/uniapp-axios-adapter/commit/f50bdf06f30179d327f3316e898054f36f72f054)), closes [#10](https://github.com/zxfd/uniapp-axios-adapter/issues/10)
+* **adapter:** 避免 baseURL 覆盖绝对地址 ([a597dad](https://github.com/zxfd/uniapp-axios-adapter/commit/a597dada650c2e2248b1e848e34136e1f0052b41)), closes [#11](https://github.com/zxfd/uniapp-axios-adapter/issues/11)
+* baseURL为undefined url错误 ([8572661](https://github.com/zxfd/uniapp-axios-adapter/commit/8572661ce88e9e2fb0ddc9a4dc3c2e7ad6661e4d))
+
 ## [0.3.2](https://github.com/zxfd/uniapp-axios-adapter/compare/0.3.1...0.3.2) (2022-11-24)
 
 
