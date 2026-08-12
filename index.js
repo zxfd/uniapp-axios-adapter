@@ -1,6 +1,6 @@
-import uniAdapter from "./src/adapters";
-import uniUploadAdapter from "./src/upload";
-import uniDownloadAdapter from "./src/download";
+import uniAdapter from "./src/adapters.js";
+import uniUploadAdapter from "./src/upload.js";
+import uniDownloadAdapter from "./src/download.js";
 
 import axios from "axios";
 
