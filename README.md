@@ -2,11 +2,11 @@
 
 用于`uni-app`的`axios`库以及使用到的`UniAdapter`适配器
 
-利用`axios`的`adapter`适配器来兼容了小程序的请求 api。添加本适配器或者使用本包导出的`axios`后,`axios`底层将使用`uni.request`发起请求
+利用 Axios 的`adapter`机制兼容 uni-app 网络 API：`UniAdapter`调用`uni.request`，`UniUploadAdapter`调用`uni.uploadFile`，`UniDownloadAdapter`调用`uni.downloadFile`。
 
 项目源码很简单,感兴趣的可以前往`github`或者`gitee`查看
 
-> 支持范围：当前`UniAdapter`仅适配普通的`uni.request`请求。`uni.uploadFile`和`uni.downloadFile`需要额外的文件参数、返回值及任务生命周期约定，目前尚未支持。
+上传和下载必须显式选择对应适配器，避免根据请求方法或`responseType`错误推断文件操作。
 
 ## 安装
 
@@ -36,7 +36,7 @@
 
 ### 自行使用适配器
 
-指定`axios`的适配器`adapter`为本适配器即可,其余用法与`axios`保持一致
+普通请求指定`adapter: UniAdapter`，其余用法与 Axios 保持一致。
 
 ```js
 import axios from "axios";
@@ -91,7 +91,7 @@ export default request;
 import http from 'src/utils/http.js' // 上一步封装axios的路径中
 
 http({
-  url: 'example/api/test'
+  url: 'example/api/test',
   method: 'get',
   params: {
     id: 123,
@@ -99,7 +99,7 @@ http({
 })
 
 http({
-  url: 'example/api/test'
+  url: 'example/api/test',
   method: 'post',
   data: {
     id: 123,
@@ -148,13 +148,92 @@ export default request;
 ```js
 // 业务代码中
 import axios from "uniapp-axios-adapter";
-axios.get({
-  url: "https://example.com/api/getUserById",
+axios.get("https://example.com/api/getUserById", {
   params: {
     id: 1,
   },
 });
 ```
+
+## 上传文件
+
+使用`UniUploadAdapter`时，通过`uniUpload`传入`uni.uploadFile`需要的文件参数。单文件上传必须设置`filePath`（H5 也可以设置`file`）和`name`：
+
+```js
+import axios, { UniUploadAdapter } from "uniapp-axios-adapter";
+
+const controller = new AbortController();
+
+const response = await axios.post("https://example.com/upload", undefined, {
+  adapter: UniUploadAdapter,
+  headers: {
+    Authorization: "Bearer token",
+  },
+  uniUpload: {
+    filePath: tempFilePaths[0],
+    name: "file",
+    formData: {
+      userId: "123",
+    },
+  },
+  signal: controller.signal,
+  onUploadProgress({ loaded, total, progress }) {
+    console.log("已上传", loaded, "总大小", total, "进度", progress);
+  },
+});
+
+// 需要取消时调用：controller.abort();
+// uni.uploadFile 原始 data 为字符串；之后仍会经过 Axios 的 transformResponse，
+// 因此合法 JSON 默认会转换为对象。
+console.log(response.data);
+```
+
+App、H5 可以使用`files`上传多个文件；`files`生效时`filePath`、`file`和`name`会被忽略：
+
+```js
+await axios.post("https://example.com/upload", undefined, {
+  adapter: UniUploadAdapter,
+  uniUpload: {
+    files: [
+      { name: "front", uri: frontFilePath },
+      { name: "back", uri: backFilePath },
+    ],
+    formData: {
+      userId: "123",
+    },
+  },
+});
+```
+
+微信等只支持单文件上传的平台，需要循环调用单文件模式。适配器会移除 Axios 自动生成的`Content-Type`，由`uni.uploadFile`设置正确的`multipart/form-data` boundary。
+
+## 下载文件
+
+使用`UniDownloadAdapter`时，`response.data`保留 uni-app 的完整下载结果，以兼容各平台的`tempFilePath`、`apFilePath`、`filePath`和`fileContent`差异：
+
+```js
+import axios, { UniDownloadAdapter } from "uniapp-axios-adapter";
+
+const response = await axios.get("https://example.com/archive.zip", {
+  adapter: UniDownloadAdapter,
+  uniDownload: {
+    // 可选，仅在支持的平台指定下载后的本地路径
+    filePath: "/storage/archive.zip",
+  },
+  onDownloadProgress({ loaded, total, progress }) {
+    console.log("已下载", loaded, "总大小", total, "进度", progress);
+  },
+});
+
+const localPath =
+  response.data.filePath ||
+  response.data.tempFilePath ||
+  response.data.apFilePath;
+```
+
+临时文件路径通常只在当前应用启动期间有效；需要长期保存时，请按 uni-app 官方文档继续调用`uni.saveFile`。上传和下载都支持 Axios 的`AbortSignal`、旧版`CancelToken`、`timeout`、`baseURL`、请求头和`validateStatus`。
+
+API 参数与平台差异以[uni.uploadFile / uni.downloadFile 官方文档](https://uniapp.dcloud.net.cn/api/request/network-file)为准。
 
 ## 更新日志
 
@@ -163,4 +242,3 @@ axios.get({
 ## TODO
 
 - 压缩打包,减小体积
-- 适配`uni.downloadFile`和`uni.uploadFile`
