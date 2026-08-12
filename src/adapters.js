@@ -1,43 +1,18 @@
-const getResponse = (res, config) => {
-  const { statusCode, errMsg } = res;
-  const response = Object.assign({}, res, {
-    status: statusCode,
-    statusText: errMsg,
-    config,
-    request: null,
-  });
-
-  return response;
-};
-
-const isAbsoluteURL = (url) =>
-  /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url);
-
-const combineURLs = (baseURL, relativeURL) =>
-  relativeURL
-    ? baseURL.replace(/\/+$/, "") + "/" + relativeURL.replace(/^\/+/, "")
-    : baseURL;
-
-const buildFullPath = (baseURL, url, allowAbsoluteUrls) => {
-  if (baseURL && (!isAbsoluteURL(url) || allowAbsoluteUrls === false)) {
-    return combineURLs(baseURL, url);
-  }
-
-  return url;
-};
+import {
+  assertUniAvailable,
+  buildFullPath,
+  createResponse,
+  normalizeHeaders,
+} from "./helpers.js";
 
 const uniAdapter = (config) => {
-  if (!uni) {
-    throw new Error("please use this in uni-app project!");
-  }
+  assertUniAvailable();
+
   return new Promise((resolve, reject) => {
     const { baseURL, url, headers, data, params, allowAbsoluteUrls } = config;
     const uniConfig = Object.assign({}, config, {
       url: buildFullPath(baseURL, url, allowAbsoluteUrls),
-      header:
-        headers && typeof headers.toJSON === "function"
-          ? headers.toJSON()
-          : headers,
+      header: normalizeHeaders(headers),
     });
 
     if (data || params) {
@@ -49,11 +24,11 @@ const uniAdapter = (config) => {
     }
     uni.request(Object.assign({}, uniConfig, {
       success(res) {
-        const response = getResponse(res, config);
+        const response = createResponse(res, config);
         resolve(response);
       },
       fail(res) {
-        const response = getResponse(res, config);
+        const response = createResponse(res, config);
         reject(response);
       },
     }));
