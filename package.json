@@ -3,7 +3,8 @@
   "version": "0.3.3",
   "packageManager": "pnpm@10.15.0",
   "description": "axios adapter for uni.request",
-  "main": "lib/index.esm.js",
+  "main": "./lib/index.cjs",
+  "module": "./lib/index.mjs",
   "scripts": {
     "test": "node --experimental-default-type=module --test test/*.test.js",
     "test:types": "tsc --noEmit --strict --skipLibCheck --module Node16 --moduleResolution Node16 test/types.ts",
@@ -14,8 +15,8 @@
   },
   "exports": {
     ".": {
-      "require": "./lib/index.cjs.js",
-      "import": "./lib/index.esm.js"
+      "require": "./lib/index.cjs",
+      "import": "./lib/index.mjs"
     }
   },
   "typings": "index.d.ts",
@@ -35,8 +36,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/zxfd/uniapp-axios-adapter"
+    "url": "git+https://github.com/zxfd/uniapp-axios-adapter.git"
   },
+  "bugs": {
+    "url": "https://github.com/zxfd/uniapp-axios-adapter/issues"
+  },
+  "homepage": "https://github.com/zxfd/uniapp-axios-adapter#readme",
   "author": "zxiaofoo@qq.com",
   "license": "MIT",
   "devDependencies": {

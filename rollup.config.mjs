@@ -1,12 +1,14 @@
 export default {
   input: "./index.js",
+  external: ["axios"],
   output: [
     {
-      file: "lib/index.cjs.js",
+      file: "lib/index.cjs",
       format: "cjs",
+      exports: "named",
     },
     {
-      file: "lib/index.esm.js",
+      file: "lib/index.mjs",
       format: "es",
     },
   ],
