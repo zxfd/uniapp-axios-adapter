@@ -24,10 +24,32 @@ export interface UniUploadOptions {
   formData?: Record<string, unknown>;
 }
 
+export interface UniDownloadOptions {
+  /** 支持该字段的平台用于指定下载后的本地存储路径。 */
+  filePath?: string;
+}
+
+export interface UniDownloadResult {
+  /** 微信等小程序平台返回的临时文件路径。 */
+  tempFilePath?: string;
+  /** 支付宝小程序返回的本地临时文件路径。 */
+  apFilePath?: string;
+  /** 指定 filePath 后部分平台返回的用户文件路径。 */
+  filePath?: string;
+  /** QQ 小程序可能直接返回的文件内容。 */
+  fileContent?: unknown;
+  /** 开发者服务器返回的 HTTP 状态码。 */
+  statusCode?: number | string;
+  /** uni-app 平台可能附带的结果消息。 */
+  errMsg?: string;
+}
+
 declare module "axios" {
   interface AxiosRequestConfig {
     /** UniUploadAdapter 使用的 uni.uploadFile 参数。 */
     uniUpload?: UniUploadOptions;
+    /** UniDownloadAdapter 使用的 uni.downloadFile 参数。 */
+    uniDownload?: UniDownloadOptions;
   }
 }
 
@@ -36,6 +58,10 @@ export declare function UniAdapter(config: AxiosRequestConfig): AxiosPromise;
 export declare function UniUploadAdapter(
   config: AxiosRequestConfig
 ): AxiosPromise<string>;
+
+export declare function UniDownloadAdapter(
+  config: AxiosRequestConfig
+): AxiosPromise<UniDownloadResult>;
 
 
 declare const axios: AxiosStatic;
