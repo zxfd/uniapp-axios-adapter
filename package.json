@@ -5,7 +5,8 @@
   "description": "axios adapter for uni.request",
   "main": "lib/index.esm.js",
   "scripts": {
-    "test": "node --experimental-default-type=module --test",
+    "test": "node --experimental-default-type=module --test test/*.test.js",
+    "test:types": "tsc --noEmit --strict --skipLibCheck --module Node16 --moduleResolution Node16 test/types.ts",
     "release": "release-it",
     "prebuild": "yarn release",
     "build": "rollup -c && yarn zip",
@@ -13,11 +14,12 @@
   },
   "exports": {
     ".": {
+      "types": "./index.d.ts",
       "require": "./lib/index.cjs.js",
       "import": "./lib/index.esm.js"
     }
   },
-  "typings": "index.d.ts",
+  "types": "./index.d.ts",
   "files": [
     "lib",
     "LICENSE",
@@ -42,7 +44,8 @@
   "devDependencies": {
     "@release-it/conventional-changelog": "^5.1.1",
     "release-it": "^15.5.0",
-    "rollup": "^3.2.5"
+    "rollup": "^3.2.5",
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "axios": "*"
