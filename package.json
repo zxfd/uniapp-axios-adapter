@@ -1,6 +1,6 @@
 {
   "name": "uniapp-axios-adapter",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "packageManager": "pnpm@10.15.0",
   "description": "axios adapter for uni.request",
   "main": "lib/index.esm.js",
