@@ -1,5 +1,12 @@
 
 
+## [0.3.5](https://github.com/zxfd/uniapp-axios-adapter/compare/0.3.4...0.3.5) (2026-08-13)
+
+
+### Bug Fixes
+
+* **types:** 补充 TypeScript 声明导出 ([6d9e159](https://github.com/zxfd/uniapp-axios-adapter/commit/6d9e159766f444519706652792a99037f108f5b4))
+
 ## [0.3.4](https://github.com/zxfd/uniapp-axios-adapter/compare/0.3.3...0.3.4) (2026-08-13)
 
 ## [0.3.3](https://github.com/zxfd/uniapp-axios-adapter/compare/0.3.2...0.3.3) (2026-08-12)
